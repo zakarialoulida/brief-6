@@ -8,7 +8,13 @@
 
   const sidebar = document.getElementById("sidebar");
   burgermenu.addEventListener("click", () => {
-    console.log("hjhhh")
+   
     sidebar.classList.toggle("hidden");
+  });
+  const fermernav = document.getElementById("fermernav");
+
+  fermernav.addEventListener("click", () => {
+    
+    sidebar.classList.add("hidden");
   });
 
