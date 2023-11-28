@@ -115,101 +115,104 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
 
 
 
-                    <li class=" col-span-1 flex flex-col text-center bg-white rounded-lg shadow  divide-gray-200">
-                      <div class="flex-1 flex flex-col justify-between p-8 ">
 
-                        <h3 class=" text-gray-900 text-sm font-medium">project name</h3>
+                    <?php
+                    // Fetch the rows from the 'product' table
+                    $id = $_SESSION['Membre_ID'];
+                    $affichuser = "SELECT * FROM users WHERE Membre_ID= '$id' ";
+                    $result = mysqli_query($sql, $affichuser);
 
+                    // Loop through the result and display each product
+                    $row = mysqli_fetch_assoc($result);
 
-                        <div class="  text-gray-500 text-clip text-sm">description Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia exercitationem maxime nostrum ad blanditiis, vel rerum debitis libero, atque eum quidem nam beatae tempora repellat recusandae, facilis perferendis quis a?</div>
+                    $nom = $row['nom'];
+                    $prenom = $row['prénom'];
+                    $roleuser = $row['roleuser'];
+                    $monequipe = $row['équipe_ID'];
+                    $image = $row['image'];
+                    $affich_monequipe = "SELECT * FROM equipes WHERE équipe_ID= '$monequipe' ";
+                    $result2 = mysqli_query($sql, $affich_monequipe);
+                    $ligne = mysqli_fetch_assoc($result2);
+                    $nomdelequipe = $ligne['Nom_Équipe'];
 
-
-                        <div class="  flex justify-between">
-                          <span class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">date de debut</span>
-                          <span class="px-2 py-1 text-green-800 text-xs font-medium bg-red-400 rounded-full">deadline</span>
-                        </div>
-                      </div>
-
-                    </li>
-
-                   
-                      <?php
-                      // Fetch the rows from the 'product' table
-                      $affichuser = "SELECT * FROM users";
-                      $result = mysqli_query($sql, $affichuser);
-
-                      // Loop through the result and display each product
-                      while ($row = mysqli_fetch_assoc($result)) {
-
-                        $nom = $row['nom'];
-                        $prenom = $row['prénom'];
-                        $roleuser = $row['roleuser'];
-
-                        $image = $row['image'];
-                        echo "
+                    echo "
                         <li class='col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200'>
                         <div class='flex-1 flex flex-col p-8'>
           <img class='w-32 h-32 flex-shrink-0 mx-auto rounded-full' src='img/$image' alt=''>
           <h3 class='mt-6 text-gray-900 text-sm font-medium'>$nom $prenom</h3>
-          <dl class='mt-1 flex-grow flex flex-col justify-between'>
-            <dt class='sr-only'></dt>
-            <dd class='text-gray-500 text-sm'>Chief Accountability Analyst</dd>
-            <dt class='sr-only'>$roleuser</dt>
+          <dl class='mt-1 flex-grow '>
+           
+            <h4>your team is :</h4>
             <dd class='mt-3'>
-              <span class='px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full'>$roleuser</span>
+              <span class='px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full'>$nomdelequipe</span>
             </dd>
           </dl>
         </div>
-        <div>
-          <div class='-mt-px flex divide-x divide-gray-200'>
-            <div class='w-0 flex-1 flex'>
-              <a href='mailto:janecooper@example.com' class='relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500'>
-
-                <span class='ml-3'>AJOUTER</span>
-              </a>
-            </div>
-            <div class='-ml-px w-0 flex-1 flex'>
-              <a href='tel:+1-202-555-0170' class='relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500'>
-
-                <span class='ml-3'>SUPPRIMER</span>
-              </a>
-            </div>
-          </div>
-        </div>
+        
+      
           </li>";
-                      }
-                      ?>
-                  
-                    <!-- <div class="flex-1 flex flex-col p-8">
-                      <img class="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src="https://images.unsplash.com/photo-1498551172505-8ee7ad69f235?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60" alt="">
-                      <h3 class="mt-6 text-gray-900 text-sm font-medium">Jenny Wilson</h3>
-                      <dl class="mt-1 flex-grow flex flex-col justify-between">
-                        <dt class="sr-only">Title</dt>
-                        <dd class="text-gray-500 text-sm">Chief Accountability Analyst</dd>
-                        <dt class="sr-only">Role</dt>
-                        <dd class="mt-3">
-                          <span class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">Admin</span>
-                        </dd>
-                      </dl>
-                    </div>
-                    <div>
-                      <div class="-mt-px flex divide-x divide-gray-200">
-                        <div class="w-0 flex-1 flex">
-                          <a href="mailto:janecooper@example.com" class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
 
-                            <span class="ml-3">AJOUTER</span>
-                          </a>
-                        </div>
-                        <div class="-ml-px w-0 flex-1 flex">
-                          <a href="tel:+1-202-555-0170" class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
+              
+                    
+                            $tirerid = "SELECT (project_ID)  FROM equipes WHERE équipe_ID= '$monequipe' ";
+                            echo "$tirerid";
+                            $affichprojects="SELECT *from projects where project_ID= '$tirerid' ";
+                            $result = mysqli_query($sql, $affichprojects);
+                            $row = mysqli_fetch_assoc($result) ;
 
-                            <span class="ml-3">SUPPRIMER</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div> -->
+                                $projectID = $row['project_ID'];
+                                $projectName = $row['Nom_project'];
+                                $description = $row['descrip'];
+                                $startDate = $row['Date_de_debut'];
+                                $endDate = $row['date_fin'];
 
-                  </ul>
+                        ?>
+
+
+
+
+
+                                <li class=" col-span-1 flex flex-col text-center bg-white rounded-lg shadow  divide-gray-200">
+                                    <div class="flex-1 flex flex-col justify-between p-8 ">
+
+                                        <h3 class=" text-gray-900 text-sm font-medium"><?php echo "  $projectName" ?></h3>
+
+
+                                        <div class="  text-gray-500  text-sm">
+                                            <?php
+                                            echo "<p class='mb-3 font-normal text-gray-700'>$description</p>";
+
+                                            ?>
+                                        </div>
+
+
+                                        <div class="  flex justify-between">
+                                            <span class="px-2 py-1 text-g*reen-800 text-xs font-medium bg-green-100 rounded-full"><?php echo "   $startDate" ?></span>
+                                            <span class="px-2 py-1 text-green-800 text-xs font-medium bg-red-400 rounded-full"><?php echo "  $endDate" ?></span>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="-mt-px flex divide-x divide-gray-200">
+
+
+
+
+
+                                        <form class="-ml-px w-0 flex-1 flex" method="post">
+
+                                            <input type="hidden" name="deleteId" value="<?php echo "$projectID"; ?>">
+                                            <button type="submit" id="delete it" class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500 ml-3">Delete it</button>
+
+
+                                        </form>
+
+
+
+                                </li>
+
+
+</ul>
 
                 </div>
               </div>
