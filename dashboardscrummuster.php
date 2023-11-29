@@ -394,7 +394,7 @@ if (isset($_POST['equipeID'])) {
                       <option value="<?php echo " $équipe_ID" ?>"><?php echo "$Nom_Équipe" ?></option>
 
                   <?php }
-                  } ?>
+                   ?>
                   </select>
                   <input id="selectedUserId" type="hidden" name="memberid" value="">
                 
@@ -456,3 +456,9 @@ if (isset($_POST['equipeID'])) {
 
 
   </html>
+  <?php
+}else {
+  header("Location: index.php");
+  exit();
+}
+?>

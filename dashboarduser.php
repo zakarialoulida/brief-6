@@ -55,7 +55,7 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
             </div>
             <nav class="mt-5 flex-1 px-2 space-y-1">
 
-              <a href="#" class=" hover:bg-[#BFD8D5] bg-[#9ad0d3] text-black group flex items-center px-2 py-2 text-sm font-medium rounded-md" x-state:on="Current" x-state:off="Default" x-state-description="Current: &quot;bg-indigo-800 text-black&quot;, Default: &quot;text-black hover:bg-[#BFD8D5] hover:bg-opacity-75&quot;">
+              <a href="dashboarduser.php" class=" hover:bg-[#BFD8D5] bg-[#9ad0d3] text-black group flex items-center px-2 py-2 text-sm font-medium rounded-md" x-state:on="Current" x-state:off="Default" x-state-description="Current: &quot;bg-indigo-800 text-black&quot;, Default: &quot;text-black hover:bg-[#BFD8D5] hover:bg-opacity-75&quot;">
                 <svg class="mr-3 flex-shrink-0 h-6 w-6 text-[black]" x-description="Heroicon name: outline/home" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                 </svg>
@@ -66,15 +66,15 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
                 <svg class="mr-3 flex-shrink-0 h-6 w-6 text-black" x-description="Heroicon name: outline/users" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
-                Team
+                USERS
               </button>
 
-              <a href="#" class="text-black hover:bg-[#BFD8D5] hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md" x-state-description="undefined: &quot;bg-indigo-800 text-black&quot;, undefined: &quot;text-black hover:bg-[#BFD8D5] hover:bg-opacity-75&quot;">
+              <button id="affichproject" class=" text-black hover:bg-[#BFD8D5] hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md" x-state-description="undefined: &quot;bg-indigo-800 text-black&quot;, undefined: &quot;text-black hover:bg-[#BFD8D5] hover:bg-opacity-75&quot;">
                 <svg class="mr-3 flex-shrink-0 h-6 w-6 text-black" x-description="Heroicon name: outline/folder" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
                 </svg>
                 Projects
-              </a>
+              </button>
 
 
             </nav>
@@ -177,7 +177,8 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
 
 
 
-                                <li class=" col-span-1 flex flex-col text-center bg-white rounded-lg shadow  divide-gray-200">
+                                <li class=" hidden project col-span-1 flex flex-col text-center bg-white rounded-lg shadow  divide-gray-200">
+                                <h2>Your Project is :</h2>
                                     <div class="flex-1 flex flex-col justify-between p-8 ">
 
                                         <h3 class=" text-gray-900 text-sm font-medium"><?php echo "  $projectName" ?></h3>
@@ -236,8 +237,8 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
   if ($equipeInfo && mysqli_num_rows($membresResult) > 0) {
     $nomEquipe = $equipeInfo['Nom_Équipe'];
     
-    echo "<div class='table hidden'>";
-    echo "<h2 class='text-2xl font-semibold text-gray-900 mt-8 mb-4'>$nomEquipe</h2>";
+    echo "<div class='table hidden p-12 '>";
+    echo "<h2 class='text-2xl font-semibold text-center bg-green-200 text-gray-900 mt-8 mb-4'>$nomEquipe</h2>";
     echo "<table class='min-w-full divide-y divide-gray-200'>";
     echo "<thead class='bg-gray-50'>";
     echo "<tr>";
@@ -281,6 +282,12 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
       const table=document.querySelector('.table')
       team.addEventListener('click',()=>{
         table.classList.toggle('hidden');
+
+      })
+      const affichproject=document.getElementById('affichproject');
+      const project =document.querySelector('.project');
+      affichproject.addEventListener('click',()=>{
+        project.classList.toggle('hidden');
 
       })
       

@@ -259,7 +259,7 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
 
                     <?php }
                         }
-                    } ?>
+                     ?>
                     </ul>
 
 
@@ -320,8 +320,8 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
                             echo "Project assignment updated successfully.";
                         } else {
                             echo "Error updating project assignment: " . mysqli_error($sql);
-                        }
-                    }
+                        }}
+                    
                     ?>
 
 
@@ -351,3 +351,9 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
 
 
     </html>
+    <?php
+}else {
+  header("Location: index.php");
+  exit();
+}
+?>
