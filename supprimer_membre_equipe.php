@@ -7,7 +7,7 @@ include 'dbconnect.php';
   
   echo"$membreID";
 
-  // Requête pour mettre à jour l'équipe_ID à NULL
+  
   $retirerMembreQuery = "UPDATE users SET équipe_ID = NULL WHERE Membre_ID = '$membreID'";
   $retirerMembreResult = mysqli_query($sql, $retirerMembreQuery);
 

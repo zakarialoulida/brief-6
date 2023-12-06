@@ -14,8 +14,10 @@ if (isset($_GET["id"])) {
 }
 if (isset($_POST['submit'])) {
     $role = $_POST["rol"];
-    $req = "UPDATE Users SET roleuser='$role' where Membre_ID= '$id'";
-
+   
+    
+  
+$req = "UPDATE Users SET roleuser='$role', project_ID=NULL  where Membre_ID= '$id'";
     $stmt = mysqli_prepare($sql, $req);
 
     if ($stmt) {
@@ -88,27 +90,7 @@ if (isset($_POST['submit'])) {
 
                     </nav>
                 </div>
-                <div class="w-full flex justify-between items-center border-t border-black p-4">
-
-
-                    <div class="ml-3 flex flex-col">
-
-                        <img class="inline-block h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
-
-
-
-                        <p class="text-sm font-medium text-black">
-                            Tom Cook
-                        </p>
-                        <p class="text-xs font-medium text-black-400 group-hover:text-black">
-                            View profile
-                        </p>
-                    </div>
-
-                    <a href="logout.php" class="p-4 w-fit h-fit text-center text-black text-xs font-medium bg-red-400 rounded-full">LOG OUT</a>
-
-
-                </div>
+            
             </div>
         </div>
         <div class=" lg:pl-64 flex flex-col flex-1">

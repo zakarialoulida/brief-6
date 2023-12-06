@@ -25,18 +25,29 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
     $affichuser = "SELECT * FROM users WHERE Membre_ID= '$id' ";
     $result = mysqli_query($sql, $affichuser);
 
-    // Loop through the result and display each product
+   
     $row = mysqli_fetch_assoc($result);
 
     $nom = $row['nom'];
     $prenom = $row['prénom'];
     $roleuser = $row['roleuser'];
     $monequipe = $row['équipe_ID'];
-    $image = $row['image'];
+      $nomdelequipe=""; 
+         $image = $row['image'];
+    if($monequipe!=NULL){
+
     $affich_monequipe = "SELECT * FROM equipes WHERE équipe_ID= '$monequipe' ";
-    $result2 = mysqli_query($sql, $affich_monequipe);
-    $ligne = mysqli_fetch_assoc($result2);
-    $nomdelequipe = $ligne['Nom_Équipe'];
+    $result= 0;
+  
+    if(mysqli_query($sql, $affich_monequipe)==NULL){
+      $result2 =  mysqli_query($sql, $affich_monequipe);
+       $ligne = mysqli_fetch_assoc($result2);
+       $nomdelequipe= $ligne['Nom_Équipe'];
+    }}else{
+      echo"dfcgvhb";
+    }
+   
+   
     ?>
 
     <div class="min-h-[640px] bg-gray-100" x-data="{ open: false }" @keydown.window.escape="open = false">
@@ -66,7 +77,7 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
                 <svg class="mr-3 flex-shrink-0 h-6 w-6 text-black" x-description="Heroicon name: outline/users" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
-                USERS
+                Collaborators
               </button>
 
               <button id="affichproject" class=" text-black hover:bg-[#BFD8D5] hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md" x-state-description="undefined: &quot;bg-indigo-800 text-black&quot;, undefined: &quot;text-black hover:bg-[#BFD8D5] hover:bg-opacity-75&quot;">
@@ -223,17 +234,14 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
   
     
   
-    // Requête pour récupérer les membres de l'équipe
+ 
     $membresQuery = "SELECT * FROM users WHERE équipe_ID = '$equipeID'";
     $membresResult = mysqli_query($sql, $membresQuery);
   
-
-  // Requête pour récupérer les informations de l'équipe
   $equipeInfoQuery = "SELECT * FROM equipes WHERE équipe_ID = '$equipeID'";
   $equipeInfoResult = mysqli_query($sql, $equipeInfoQuery);
   $equipeInfo = mysqli_fetch_assoc($equipeInfoResult);
 
-  // Vérifiez s'il y a des membres dans l'équipe
   if ($equipeInfo && mysqli_num_rows($membresResult) > 0) {
     $nomEquipe = $equipeInfo['Nom_Équipe'];
     
@@ -249,7 +257,7 @@ if (isset($_SESSION['Membre_ID']) && isset($_SESSION['nom'])) {
     echo "</thead>";
     echo "<tbody class='bg-white divide-y divide-gray-200'>";
 
-    // Affichage des membres dans le tableau
+    
     while ($membre = mysqli_fetch_assoc($membresResult)) {
       $membreID = $membre['Membre_ID'];
       $nomMembre = $membre['nom'];

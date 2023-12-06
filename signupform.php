@@ -2,32 +2,30 @@
 include 'dbconnect.php';
 
 if (isset($_POST['submit'])) {
-    // Récupération des données du formulaire
+    
     $username = $_POST['Username'];
     $userlastname = $_POST['userlastname'];
     $phonenumber = $_POST['phonenumber'];
     $email = $_POST['email'];
     $password = $_POST['pass'];
     $role = "user";
-    // Récupération du; nom du fichier image
+   
     $product_picture_name = $_FILES['product_picture']['name'];
 
-    // Déplacement du fichier image vers le répertoire d'images
+
     move_uploaded_file($_FILES['product_picture']['tmp_name'], "./img/$product_picture_name");
 
-    // Requête SQL pour insérer les données dans la base de données
     $stmt = $sql->prepare("INSERT INTO users (prénom, nom, téléphone, email, motdepasse,roleuser, image) VALUES (?, ?, ?, ?, ?,?, ?)");
     $stmt->bind_param('sssssss', $username, $userlastname, $phonenumber, $email, $password, $role, $product_picture_name);
 
-    // Exécution de la requête
     if ($stmt->execute()) {
         echo "<script>alert('Données insérées avec succès');</script>";
     } else {
         echo "<script>alert('Échec de l'exécution de la requête: " . $stmt->error . "');</script>";
     }
 
-    // Redirection vers la page actuelle après l'insertion des données
-    header("Location: " . $_SERVER['PHP_SELF']);
+    
+    header("Location: localhost/index.php/");
     exit();
 }
 ?>
@@ -110,8 +108,8 @@ if (isset($_POST['submit'])) {
                 <div class="flex gap-2 items-center"><i class="fa-solid fa-lock fa-lg"></i>
                     <input class="border-2 border-black rounded w-[250px] p-1" type="password" id="cpass" name="cpass" placeholder="Retype Password" required></br></br>
                 </div>
-                <input class=" bg-teal-100 border-2 border-black rounded w-[285px] p-1" type="submit" id="btn" value="SignUp" name="submit" />
-            </form>
+                <a href="index.php"><input class=" bg-teal-100 border-2 border-black rounded w-[285px] p-1" type="submit" id="btn" value="SignUp" name="submit" /></a>
+                   </form>
         </div>
 
 </body>
